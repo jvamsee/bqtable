@@ -7,7 +7,7 @@ RUN apk add --update \
 	
 RUN curl -sSL https://sdk.cloud.google.com | bash
 
-RUN PATH $PATH:/root/google-cloud-sdk/bin
+ENV PATH $PATH:/root/google-cloud-sdk/bin
 
 COPY ./bqtable.sh /opt/
 
