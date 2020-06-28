@@ -13,7 +13,7 @@ spec:
       labels:
         deploy: gcloud-sdk-bq
     spec:
-      serviceAccount: 
+      serviceAccount: iden-my-demo-cluster
       containers:
         - name: gcloud-sdk-bq
           image: eu.gcr.io/kube-project-279210/gcloud-sdk-bq:v0.1.0
