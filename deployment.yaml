@@ -1,0 +1,31 @@
+apiVersion: extentions/v1beta1
+kind: Deployment
+metadata:
+  name: gcloud-bq-deploy
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deploy: gcloud-sdk-bq
+  template:
+    metadata:
+      labels:
+        deploy: gcloud-sdk-bq
+    spec:
+      serviceAccount: 
+      containers:
+        - name: gcloud-sdk-bq
+          image: eu.gcr.io/kube-project-279210/gcloud-sdk-bq:v0.1.0
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.5"
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "sh -x /opt/bqtable.sh kube-project-279210 mydataset mytable"]
